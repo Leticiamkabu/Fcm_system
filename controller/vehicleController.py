@@ -4,8 +4,8 @@ from sqlalchemy.orm import Session
 from database.databaseConnection import SessionLocal
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select, func, text
-from models.vehicleModel import Vehicle
-from schemas import vehicleSchema
+from model.vehicleModel import Vehicle
+from schema.vehicleSchema import *
 import logging
 from typing import Annotated
 import uuid
@@ -44,7 +44,7 @@ async def create_vehicle(vehicle_data: VehicleCreation, db: db_dependency):
    
     data = Vehicle(
         vehicle_id=vehicle_data.vehicle_id,
-        allocated_liters=user_vehicle_data.allocated_liters,
+        allocated_liters=vehicle_data.allocated_liters,
         vehicle_number_plate=vehicle_data.vehicle_number_plate,
         allocated_date=vehicle_data.allocated_date,
         balance=vehicle_data.balance,
@@ -58,3 +58,24 @@ async def create_vehicle(vehicle_data: VehicleCreation, db: db_dependency):
         await db.commit()
 
     return {"message": "Vehicle  created successfully", "data": data}
+
+
+
+
+# delete  vehicle
+@router.post("/vehicle/delete_vehicle/{id}")
+async def create_vehicle(id: str, db: db_dependency):
+    vehicle = await db.get(Vehicle, id)
+  
+    
+    if not vehicle:
+        raise HTTPException(
+            status_code=404, 
+            detail="Form not found",
+            
+        )
+    
+    await db.delete(vehicle)
+    await db.commit()
+    
+    return "Vehicle data delete completed" 
