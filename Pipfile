@@ -9,6 +9,7 @@ fastapi = "*"
 sqlalchemy = "*"
 python-dotenv = "*"
 asyncpg = "*"
+requests = "*"
 
 
 [dev-packages]

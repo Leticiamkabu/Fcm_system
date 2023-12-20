@@ -11,20 +11,17 @@ from starlette.middleware.base import BaseHTTPMiddleware
 
 
 
-from schemas import formsSchema, authenticationSchema
-from models import formModel, authenticationModel
-from controllers import formsController, authenticationController,formSubmissionController,dashboardController,fileController
-from fastapi_login import LoginManager
+from schema import authenticationSchema
+from model import authenticationModel
+from controller import authenticationController
 
 
-from fastapi.security import OAuth2PasswordRequestForm
-
-from fastapi_login.exceptions import InvalidCredentialsException
-from middleWare import *
 
 
-SECRET = "super-secret-key"
-manager = LoginManager(SECRET, '/login')
+
+
+
+
 
 
 
@@ -57,14 +54,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-async def authenticate_user():
-    return TemporaryAuthMiddleware()
 
-# app.add_middleware(TemporaryAuthMiddleware)
+
 
 app.include_router(authenticationController.router, tags=["Authentication"])
-app.include_router(formsController.router, prefix="", tags=["Forms"])
-app.include_router(formSubmissionController.router, prefix="", tags=["Form_submissions"])
-app.include_router(dashboardController.router, prefix="", tags=["Dashboard"])
-app.include_router(fileController.router, prefix="", tags=["Upload"])
+
 
