@@ -4,8 +4,8 @@ from sqlalchemy.orm import Session
 from database.databaseConnection import SessionLocal
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select, func, text
-from models.userModel import User
-from schemas import userSchemas
+from model.userModel import User
+from schema.userSchemas import *
 import logging
 from typing import Annotated
 import uuid

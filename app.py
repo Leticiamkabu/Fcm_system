@@ -13,7 +13,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 
 from schema import authenticationSchema, vehicleSchema
 from model import authenticationModel, vehicleModel
-from controller import authenticationController, vehicleContoller
+from controller import authenticationController, vehicleController
 
 
 
