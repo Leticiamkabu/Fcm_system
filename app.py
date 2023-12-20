@@ -11,9 +11,10 @@ from starlette.middleware.base import BaseHTTPMiddleware
 
 
 
-from schema import authenticationSchema
-from model import authenticationModel
-from controller import authenticationController
+from schema import authenticationSchema, vehicleSchema
+from model import authenticationModel, vehicleModel
+from controller import authenticationController, vehicleContoller
+
 
 
 
@@ -57,6 +58,7 @@ app.add_middleware(
 
 
 
-app.include_router(authenticationController.router, tags=["Authentication"])
+app.include_router(authenticationController.router, tags=["Authentication"]),
+app.include_router(vehicleController.router, tags=["Vehicle"])
 
 
