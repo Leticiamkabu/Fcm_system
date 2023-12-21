@@ -43,12 +43,14 @@ router = APIRouter()
 async def create_vehicle(vehicle_data: VehicleCreation, db: db_dependency):
    
     data = Vehicle(
-        vehicle_id=vehicle_data.vehicle_id,
-        allocated_liters=vehicle_data.allocated_liters,
-        vehicle_number_plate=vehicle_data.vehicle_number_plate,
-        allocated_date=vehicle_data.allocated_date,
-        balance=vehicle_data.balance,
-        created_by=vehicle_data.created_by,
+       
+        vehicle_number = vehicle_data.vehicle_number,
+        vehicle_type = vehicle_data.vehicle_type,
+        vehicle_model = vehicle_data.vehicle_model,
+        driver_id = vehicle_data.driver_id,
+        chasis_number = vehicle_data.chasis_number,
+        fuel_capacity = vehicle_data.fuel_capacity,
+        is_valid = vehicle_data.is_valid
 
         )
 
@@ -60,7 +62,31 @@ async def create_vehicle(vehicle_data: VehicleCreation, db: db_dependency):
     return {"message": "Vehicle  created successfully", "data": data}
 
 
+# get vehicle by id
+@router.get("/vehicle/{id}")
+async def create_vehicle(id: str, db: db_dependency):
+    vehicle_data = await db.get(Vehicle, id)
+    
+    return vehicle_data
 
+# edit vehicle by id
+@router.put("/vehicle/edit/{id}")
+async def create_vehicle(id: str, db: db_dependency, vehicle_update_data: dict):
+    vehicle_data = await db.get(Vehicle, id)
+    
+    if vehicle_data == None:
+        raise HTTPException(status_code=200, detail="Form is empty or null", data = form_data)
+    # results = vehicle_update_data.__dict__
+    for key, value in vehicle_update_data.items():
+        setattr(vehicle_data, key, value)
+        
+        
+    db.add(vehicle_data)
+    await db.commit()
+    
+    
+    return vehicle_data
+   
 
 # delete  vehicle
 @router.post("/vehicle/delete_vehicle/{id}")
@@ -79,3 +105,6 @@ async def create_vehicle(id: str, db: db_dependency):
     await db.commit()
     
     return "Vehicle data delete completed" 
+
+
+

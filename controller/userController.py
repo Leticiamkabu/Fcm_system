@@ -39,15 +39,20 @@ router = APIRouter()
 
 # create user
 @router.post("/users/create_user")
-async def create_forms(user_data: UserCreation, db: db_dependency):
+async def create_user(user_data: UserCreation, db: db_dependency):
    
     forms_data = User(
-            fname=user_data.name,
-            lname=user_data.lname,
-            email=user_data.email,
-            phone_number=user_data.phone_number,
-            role=user_data.role,
-            created_by=user_data.created_by,
+            name=user_data.name,
+            identification=user_data.identification,
+            phone= user_data.phone,
+            identification_type= user_data.identification_type,
+            date_of_birth = user_data.date_of_birth,
+            email = user_data.email,
+            address= user_data.address,
+            role = user_data.role,
+            digital_address = user_data.digital_address,
+            nsId = user_data.nsId,
+            is_active = user_data.is_active,
 
         )
 

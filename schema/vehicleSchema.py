@@ -2,10 +2,18 @@ from pydantic import BaseModel
 
 
 class VehicleCreation(BaseModel):
+    vehicle_number: str
+    vehicle_type: str
+    vehicle_model: str
+    driver_id: str
+    chasis_number: str
+    fuel_capacity:str
+    is_valid: bool
+    
+    
+class AllocationCreation(BaseModel):
     vehicle_id: str
-    allocated_liters: str
-    vehicle_number_plate: str
-    allocated_date: str
-    balance: str
-    created_by: str
-    # updated_by: str
+    allocation_days: str
+    allocation_cap: str
+    allocation_bal: str
+    lastFueling_date: str
