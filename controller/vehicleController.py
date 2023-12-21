@@ -79,3 +79,34 @@ async def create_vehicle(id: str, db: db_dependency):
     await db.commit()
     
     return "Vehicle data delete completed" 
+
+
+
+# # update an instance in a form (patch)
+# @router.patch("/forms/update_individual_form_fields/{id}")
+# async def update_form(id: uuid.UUID, db: db_dependency, form_input: dict):
+#     form_data = await db.get(Vehicle, id)
+#     converted_form_data = form_data.__dict__
+#     inputs = form_input
+#     result = {}
+    
+#     allocated_date = 
+    
+#     for key1, value1 in converted_form_data.items():
+#         for key2 ,value2 in inputs.items():
+#             if key1 == key2:
+#                 result[key2] = value2
+                
+                
+#             elif key1 != key2 :
+#                 result[key1] =  value1
+    
+#     for key, value in result.items():
+#         setattr(form_data, key, value)
+    
+
+#     db.add(form_data)
+#     await db.commit()
+#     await db.refresh(form_data)
+  
+#     return form_data
