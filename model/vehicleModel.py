@@ -25,7 +25,7 @@ class Vehicle(Base):
     
 
 
-class Vehicle(Base):
+class Entitlement(Base):
     __tablename__ = 'entitlements'
 
     id = Column(UUID(as_uuid=True), primary_key=True, server_default=text(
@@ -51,7 +51,6 @@ class Fuelings(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, server_default=text(
         "uuid_generate_v4()"), unique=True, index=True)
     vehicle_id = Column(String, nullable=False)
-    vehicle_type = Column(String, nullable=False)
     amount_allocated = Column(String, nullable=True)
     created_on = Column(DateTime, nullable=False,
                         default=func.current_timestamp())

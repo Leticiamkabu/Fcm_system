@@ -21,6 +21,6 @@ class User(Base):
     nsId = Column(String, nullable=False)
     is_active = Column(Boolean, nullable=False, default=func.current_timestamp())
     created_on = Column(DateTime, nullable=False, default=func.current_timestamp())
-    UpdatedOn = Column(DateTime, nullable=False, default=func.current_timestamp())
+    Updated_on = Column(DateTime, nullable=False, default=func.current_timestamp())
     created_by = Column(String, nullable=False)
     updated_by = Column(String, nullable=False)
